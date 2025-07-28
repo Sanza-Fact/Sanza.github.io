@@ -1,27 +1,101 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun!</title>
-    <link rel="stylesheet" href="styles.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="styles.css">
+   <link rel="icon" href="Bicon.png" type="image/png">
 </head>
-<body>
-    <div class="container">
-        <div class="background"></div>
-        <div class="content">
-            <img src="birthday_image.jpg" alt="Foto Ulang Tahun" class="birthday-image">
-            <div class="text-box">
-                <p id="text"></p>
+   <body background="BG.jpeg">
+   <div class="container">
+      <div class ="Profile" >
+         <img src="Davica.jpg" alt="Yang Lagi Ultah" class="foto" >
+               <div class="Name">
+               <p>Davica Putri Kusnadi</p>
+               </div> 
+               <button class="Magic" id="Sihir"> Magic? </button>
             </div>
-            <button id="celebrateButton">Tap me AnyTime</button>
-        </div>
-    </div>
+      </div>
+   </div>   
 
-    <audio id="birthdayAudio">
-        <source src="birthday_song.mp3" type="audio/mpeg">
-    </audio>
+    <div class="container2">
+      <div class="Popup" id="Pupop">
+         <div class="Card-Box">
+            <button class="tutup">&times;</button>
+            <h3 class="judul">Selamat Ulang Tahun!</h3>
+            <div class="Kotak-Gambar">
+               <button class="Mundur" id="Back">❮</button>
+               <div class="Photo">
+                  <img src="one.jpeg" alt="HBD" class="Ucapan" id="galleryImage">
+               </div>
+               <button class="Maju" id="Forward">❯</button>
+            </div>
+            <div class="deskripsi">
+               <p id="imageTitle">Ucapan 1</p>
+               <p id="imageDesc">Pesan spesial untukmu</p>
+            </div>
+         </div>
+      </div>
 
-    <script src="script.js"></script>
-</body>
+      <audio id="audio">
+         <source src="Cut.mp3" type="audio/mpeg">
+      </audio>
+   <script> 
+      document.getElementById('Sihir').onclick = function() {
+         document.getElementById('audio').play();
+      };
+
+         const galleryData = [
+            {
+               image: "one.jpeg",
+               title: "Happy Birthday!",
+               desc: "Now You've grown Up Hope Be Better and Better Every Years, I Wish You All The Best, and Always Be Happy, Healthy, and Surrounded by Loved Ones."
+                     
+            },
+            {
+               image: "two.jpeg",
+               title: "My BIggest Hope",
+               desc: "You Still be You no matter what, You always be The Best For Me  "
+            },
+            {
+               image: "three.jpeg",
+               title: "Doa Terbaik",
+               desc: "Semoga kamu selalu sehat, bahagia, dan dikelilingi orang-orang tercinta."
+            }
+         ];
+         
+         let currentImageIndex = 0;
+         const galleryImage = document.getElementById('galleryImage');
+         const imageTitle = document.getElementById('imageTitle');
+         const imageDesc = document.getElementById('imageDesc');
+
+         function showImage(index) {
+            const imageData = galleryData[index];
+            galleryImage.src = imageData.image;
+            imageTitle.textContent = imageData.title;
+            imageDesc.textContent = imageData.desc;
+         }
+         document.getElementById('Sihir').onclick = function() {
+            document.getElementById('audio').play();
+            document.getElementById('Pupop').style.display = 'flex';
+            showImage(currentImageIndex);
+         };
+         document.querySelector('.tutup').onclick = function() {
+            document.getElementById('Pupop').style.display = 'none';
+         };
+         document.getElementById('Pupop').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('Pupop')) {
+               document.getElementById('Pupop').style.display = 'none';
+            }
+         });
+         document.getElementById('Back').onclick = function() {
+            currentImageIndex = (currentImageIndex - 1 + galleryData.length) % galleryData.length;
+            showImage(currentImageIndex);
+         }
+         document.getElementById('Forward').onclick = function() {
+            currentImageIndex = (currentImageIndex + 1) % galleryData.length;
+            showImage(currentImageIndex);
+         }
+   </script>
+   </body>
 </html>
